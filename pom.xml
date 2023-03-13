@@ -50,11 +50,11 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-thymeleaf</artifactId>
 </dependency>
-		<dependency>
+<dependency>
 			<groupId>com.pmservice</groupId>
 			<artifactId>pm-app-service</artifactId>
 			<version>1.0</version>
-		</dependency>
+		</dependency>		
 	</dependencies>
 
 	<build>
