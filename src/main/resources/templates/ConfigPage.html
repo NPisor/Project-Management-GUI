@@ -27,7 +27,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -63,8 +63,9 @@
                 <div id="collapseComp" class="collapse" aria-labelledby="headingComp" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">User Database</h6>
-                        <a class="collapse-item" href="buttons.html">View All Users</a>
+                        <a class="collapse-item" href="buttons.html">List Users By Job</a>
                         <a class="collapse-item" href="cards.html">List Users By Role</a>
+                        <a class="collapse-item" href="buttons.html">List All Users</a>
                     </div>
                 </div>
             </li>
@@ -322,7 +323,65 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Tasks Overview</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Recent User Activity</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-area" style='display: block;height: 25%; margin-bottom: 5%;'>
+                                        <table id="recentActivityTable" width="100%">
+                                            <tr style="color:lightseagreen">
+                                              <th width="10%">User ID</th>
+                                              <th width="15%">Modified On</th>
+                                              <th width="10%">Modified By</th>
+                                              <th width="7%">Client</th>
+                                              <th width="7%">Role</th>
+                                            </tr>                                            
+                                        </table>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Content Column -->
+                        <div class="col-lg-12 mb-12">
+
+                            <!-- Project Card Example -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">User Activity</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-area" style='display: block;height: 25%; margin-bottom: 5%;'>
+                                        <table id="userActivityTable" width="100%">
+                                            <tr style="color:lightseagreen">
+                                            <th width="10%">User ID</th>
+                                            <th width="15%">First Name</th>
+                                            <th width="15%">Last Name</th>
+                                            <th width="7%">Role</th>
+                                            <th width="7%">Client</th>
+                                            <th width="7%">Created On</th>
+                                            <th width="7%">Last Modified</th>
+                                            </tr>                                            
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <!-- Area Chart -->
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->                                    
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Configure User Properties</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -330,189 +389,28 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                             aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <div class="dropdown-header">User Options:</div>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#createUserModal">Create New User</a>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area" style='display: block;height: 25%; margin-bottom: 5%;'>
-                                        <table id="taskTable" width="100%">
+                                        <table id="configureTable" width="100%">
                                             <tr style="color:lightseagreen">
-                                              <th width="10%">Task ID</th>
-                                              <th width="15%">Created On</th>
-                                              <th width="10%">Assigner</th>
-                                              <th width="7%">Status</th>
-                                              <th width="15%">Completed On</th>
-                                              <th width="15%">Submitted On</th>
-                                              <th width="7%">Priority</th>
+                                            <th width="15%">First Name</th>
+                                            <th width="15%">Last Name</th>
+                                            <th width="7%">Role</th>
+                                            <th width="7%">Client</th>
                                             </tr>                                            
                                         </table>
-                                    </div>
-                                    <div style="display: block;margin-left: auto;margin-right: auto;width: 50%;" id="taskImage">                                    
-                                    </div>
+                                        
+                                    </div>  
                                 </div>
                             </div>
-                        </div>
-
-                        
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Content Column -->
-                        <div class="col-lg-6 mb-4">
-
-                            <!-- Project Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="small font-weight-bold">Server Migration <span
-                                            class="float-right">20%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Sales Tracking <span
-                                            class="float-right">40%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Customer Database <span
-                                            class="float-right">60%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar" role="progressbar" style="width: 60%"
-                                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Payout Details <span
-                                            class="float-right">80%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Account Setup <span
-                                            class="float-right">Complete!</span></h4>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Color System -->
-                            <div class="row">
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-primary text-white shadow">
-                                        <div class="card-body">
-                                            Primary
-                                            <div class="text-white-50 small">#4e73df</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-success text-white shadow">
-                                        <div class="card-body">
-                                            Success
-                                            <div class="text-white-50 small">#1cc88a</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-info text-white shadow">
-                                        <div class="card-body">
-                                            Info
-                                            <div class="text-white-50 small">#36b9cc</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-warning text-white shadow">
-                                        <div class="card-body">
-                                            Warning
-                                            <div class="text-white-50 small">#f6c23e</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-danger text-white shadow">
-                                        <div class="card-body">
-                                            Danger
-                                            <div class="text-white-50 small">#e74a3b</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-secondary text-white shadow">
-                                        <div class="card-body">
-                                            Secondary
-                                            <div class="text-white-50 small">#858796</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-light text-black shadow">
-                                        <div class="card-body">
-                                            Light
-                                            <div class="text-black-50 small">#f8f9fc</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-dark text-white shadow">
-                                        <div class="card-body">
-                                            Dark
-                                            <div class="text-white-50 small">#5a5c69</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-lg-6 mb-4">
-
-                            <!-- Illustrations -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                            src="img/undraw_posting_photo.svg" alt="...">
-                                    </div>
-                                    <p>Add some quality, svg illustrations to your project courtesy of <a
-                                            target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                                        constantly updated collection of beautiful svg images that you can use
-                                        completely free and without attribution!</p>
-                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                                        unDraw &rarr;</a>
-                                </div>
-                            </div>
-
-                            <!-- Approach -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                        CSS bloat and poor page performance. Custom CSS classes are used to create
-                                        custom components and custom utility classes.</p>
-                                    <p class="mb-0">Before working with this theme, you should become familiar with the
-                                        Bootstrap framework, especially the utility classes.</p>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -560,6 +458,139 @@
         </div>
     </div>
 
+    <!-- Create User Modal-->
+    <div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New User Creation Wizard</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="display: flex;flex-direction: column;align-items: flex-start; align-items: center;">
+                    <div>
+                        <form class="user" id="createUserForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-user"
+                                    id="newUserfName"
+                                    placeholder="New User First Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-user"
+                                    id="newUserlName" placeholder="New User Last Name">
+                            </div>
+                        </form>
+                    </div>
+                    <div> 
+                        <ul style="list-style-type: none;">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="rolesDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="badge badge-danger" id="roleSelection">Select Role:</span>
+                                </a>             
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" id="rolesMenu"
+                                        aria-labelledby="rolesDropdown">
+                                        <h6 class="dropdown-header">
+                                            Roles
+                                        </h6>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image mr-3">
+                                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                                    alt="...">
+                                                <div class="status-indicator bg-success"></div>
+                                            </div>
+                                            <div class="userRole">
+                                                Admin
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image mr-3">
+                                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                                    alt="...">
+                                                <div class="status-indicator bg-success"></div>
+                                            </div>
+                                            <div class="userRole">
+                                                Supervisor
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image mr-3">
+                                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                                    alt="...">
+                                                <div class="status-indicator bg-success"></div>
+                                            </div>
+                                            <div class="userRole">
+                                                Operator
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image mr-3">
+                                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                                    alt="...">
+                                                <div class="status-indicator bg-success"></div>
+                                            </div>
+                                            <div class="userRole">
+                                                Laborer
+                                            </div>
+                                        </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="clientDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="badge badge-danger" id="clientSelection">Select Client:</span>
+                                </a>             
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" id="clientMenu"
+                                        aria-labelledby="clientDropdown">
+                                        <h6 class="dropdown-header">
+                                            Clients
+                                        </h6>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image mr-3">
+                                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                                    alt="...">
+                                                <div class="status-indicator bg-success"></div>
+                                            </div>
+                                            <div class="userClient">
+                                                Client 1
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image mr-3">
+                                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                                    alt="...">
+                                                <div class="status-indicator bg-success"></div>
+                                            </div>
+                                            <div class="userClient">
+                                                Client 2
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image mr-3">
+                                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                                    alt="...">
+                                                <div class="status-indicator bg-success"></div>
+                                            </div>
+                                            <div class="userClient">
+                                                Client 3
+                                            </div>
+                                        </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" type="button" id="clientAddBtn">Add</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -569,6 +600,15 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        $(".modal").on("hidden.bs.modal", function(){
+            var userForm = document.getElementById('createUserForm');
+            userForm.reset();
+            $("#roleSelection").html("Select Role:");
+            $("#clientSelection").html("Select Client:");
+        });
+    </script>
 
     <script>
         function loadTask() {
@@ -626,6 +666,53 @@
                     }
                 }
             };
+    </script>
+
+    <script>
+            $('#clientAddBtn').click(function(){
+                var configureTable = document.getElementById('configureTable'); 
+                var newRow = configureTable.insertRow(-1);
+                newRow.style.color='black';
+                var fNameCell = newRow.insertCell(0);
+                fNameCell.style.width='15%';
+                var fName = document.getElementById('newUserfName').value;
+                fNameCell.innerHTML=fName;
+                var lNameCell = newRow.insertCell(1);
+                lNameCell.style.width='15%';
+                var lName = document.getElementById('newUserlName').value;
+                lNameCell.innerHTML=lName;
+                var roleCell = newRow.insertCell(2);
+                roleCell.style.width='7%';
+                var role = document.getElementById('roleSelection').innerHTML;
+                roleCell.innerHTML=role;
+                var clientCell = newRow.insertCell(3);
+                clientCell.style.width='10%';
+                var client = document.getElementById('clientSelection').innerHTML;
+                clientCell.innerHTML=client;
+            });
+    </script>
+
+    <script>
+        function configure() {
+                var configureTable = document.getElementById('configureTable');            
+                };
+    </script>
+
+    <script>
+        $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+        });
+    </script>
+
+    <script>
+        $(".userRole").click(function () {
+             var selText = $(this).text();
+             $("#roleSelection").html(selText);
+         });
+         $(".userClient").click(function () {
+             var selText = $(this).text();
+             $("#clientSelection").html(selText);
+         });
     </script>
 
     <script>
