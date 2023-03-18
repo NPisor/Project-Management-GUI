@@ -28,15 +28,15 @@ public class UserConfigurationController {
     @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value = "/createUser", method = RequestMethod.POST, produces="application/json")
     @ResponseBody
-    public String createNewUser(Users newUser) throws JsonProcessingException
+    public String createNewUser(Users newUser) throws Exception
     {
         ObjectMapper om = new ObjectMapper();
-        if(usersRepo.findById(newUser.getId())==null){
+        if(usersRepo.findById(newUser.getId()).isEmpty()){
             usersRepo.save(newUser);
             return om.writeValueAsString("User: " + newUser.getId() + " created successfully.");
         }
         else{
-            return om.writeValueAsString("Error: User already exists.");
+            throw new Exception("User already exists in database with ID: " + newUser.getId());
         }
     }
     

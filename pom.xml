@@ -51,10 +51,11 @@
     <artifactId>spring-boot-starter-thymeleaf</artifactId>
 </dependency>
 <dependency>
-			<groupId>com.pmservice</groupId>
-			<artifactId>pm-app-service</artifactId>
-			<version>1.0</version>
-		</dependency>		
+		<groupId>com.pmservice</groupId>
+    	<artifactId>pm-app-service</artifactId>
+    	<version>1.0</version>
+		</dependency>
+			
 	</dependencies>
 
 	<build>

@@ -648,6 +648,26 @@
         </div>
     </div>
 
+    <!-- Task Information Modal -->
+    <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Assigner Information:</h5>
+              <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="display: flex;flex-direction: column;align-items: flex-start; align-items: center;">...
+                <div>
+                    <span id="assignerInformation"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -660,18 +680,19 @@
 
     <script>
         function loadTask() {
-                var taskId = document.getElementById("searchbarText").value;
+                var taskId = document.getElementById("searchbarText");
                 var taskTable = document.getElementById('taskTable');
                 var taskImage = document.getElementById('taskImage');
-                taskId = parseInt(taskId);
-                if(taskId != null){
-                    if(typeof taskId === "number"){
+                if(parseInt(taskId.value) != null){
+                    if(typeof parseInt(taskId.value) === "number"){
                         $.ajax("/tasksearch",{
                         type:"get",
                         dataType: 'json',
-                        data:{"id":taskId},
+                        data:{"id":taskId.value},
                         async: true,
-                        success: function (response) {
+                        success: function (response) {                                    
+                                    sessionStorage.removeItem('assignerName');                   
+                                    sessionStorage.setItem('assignerName', response.assignerName);
                                     while (taskImage.firstChild) {
                                         taskImage.removeChild(taskImage.firstChild);
                                     }
@@ -684,31 +705,31 @@
                                     idCell.innerHTML=response.id;
                                     var cOnCell = newRow.insertCell(1);
                                     cOnCell.style.width='15%';
-                                    cOnCell.innerHTML=response.createdTs;
+                                    cOnCell.innerHTML=response.createdDt;
                                     var assignerCell = newRow.insertCell(2);
                                     assignerCell.style.width='10%';
-                                    assignerCell.innerHTML=response.assignerId;
+                                    assignerCell.innerHTML=response.assignerId + " ("+response.assignerName+")";
                                     var statusCell = newRow.insertCell(3);
                                     statusCell.style.width='7%';
                                     statusCell.innerHTML=response.status;
                                     var completeCell = newRow.insertCell(4);
                                     completeCell.style.width='15%';
-                                    completeCell.innerHTML=response.taskCompleted;
+                                    completeCell.innerHTML=response.completedDt;
                                     var submitCell = newRow.insertCell(5);
                                     submitCell.style.width='15%';
-                                    submitCell.innerHTML=response.taskSubmittedForReview;
+                                    submitCell.innerHTML=response.submittedDt;
                                     var priorityCell = newRow.insertCell(6);
                                     priorityCell.style.width='7%';
                                     priorityCell.innerHTML=response.priority;
-
                                     var taskImageSrc = document.createElement("img");   
                                     taskImageSrc.style.display='block';
                                     taskImageSrc.style.width='100%';                                                                    
-                                    taskImageSrc.src = "https://www.portland.gov/sites/default/files/styles/facebook/public/2020-08/driveway-reconstruction.jpg?itok=bdnt2SZW";
-                                    taskImage.appendChild(taskImageSrc);
+                                    taskImageSrc.src = response.taskImageUrl;
+                                    taskImage.appendChild(taskImageSrc);                               
                         },
-                        error:function(jqXHR,textStatus,errorThrown ){
-                            alert('Exception:'+errorThrown );
+                        error: function () {
+                            alert("Invalid Task ID. Please try again.");
+                            taskId.value='';
                         }
                         });
                     }

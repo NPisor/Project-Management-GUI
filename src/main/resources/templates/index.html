@@ -156,7 +156,7 @@
                             <input type="text"class="form-control bg-light border-0 small" placeholder="Enter User Id..."
                                 aria-label="Search" aria-describedby="basic-addon2" id="searchbarText">
                             <div class="input-group-append">
-                                <button type="button" class="btn btn-primary" id="searchbarButton" onclick="loadSearchResult();window.location.replace('customer')">
+                                <button type="button" class="btn btn-primary" id="searchbarButton">
                                     <i class="fas fa-search fa-sm"></i>                                    
                                 </button>
                             </div>
@@ -738,17 +738,29 @@
     <script src="js/demo/chart-pie-demo.js"></script>
 
     <!-- Custom Scripts-->
+    
     <script>
-        function loadSearchResult(){
-            var customerId = document.getElementById("searchbarText").value;
-            customerId = parseInt(customerId);
-            if(customerId != null){
-                if(typeof customerId === "number"){ 
-                    sessionStorage.removeItem('customerId');                   
-                    sessionStorage.setItem('customerId', customerId);
-                }
-            }
-        }
+        $('#searchbarButton').click(function () {
+            var customerId = document.getElementById("searchbarText");
+            $.ajax("/userSearch",{
+                        type:"get",
+                        dataType: 'json',
+                        data:{"id":customerId.value},
+                        async: true,
+                        success: function (response) {
+                            sessionStorage.removeItem('customerId');                   
+                            sessionStorage.setItem('customerId', response.id);
+                            window.location.replace('customer')
+                        },
+                        error: function (error) {
+                            alert("Invalid User ID. Please try again.");
+                            customerId.value = '';
+                        }
+                    }
+                )
+        
+        })
+
     </script>
 
 </body>
