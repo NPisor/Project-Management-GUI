@@ -685,7 +685,7 @@
                 var taskImage = document.getElementById('taskImage');
                 if(parseInt(taskId.value) != null){
                     if(typeof parseInt(taskId.value) === "number"){
-                        $.ajax("/tasksearch",{
+                        $.ajax("https://hybrid-matrix-380703.uw.r.appspot.com/tasksearch",{
                         type:"get",
                         dataType: 'json',
                         data:{"id":taskId.value},
@@ -741,10 +741,10 @@
         function loadCustomer(){
             let customerId = sessionStorage.getItem('customerId');
             let customerName = document.getElementById('customerName');
-            $.ajax("/loadCustomer",{
+            $.ajax("https://hybrid-matrix-380703.uw.r.appspot.com/users/id",{
                     type:"get",
                     dataType: 'json',
-                    data:{"customerId":customerId},
+                    data:{id:customerId},
                     async: true,
                     success: function (response) {
                         customerName.innerHTML=response.fname + " " + response.lname;

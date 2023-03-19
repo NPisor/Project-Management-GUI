@@ -670,25 +670,43 @@
 
     <script>
             $('#clientAddBtn').click(function(){
-                var configureTable = document.getElementById('configureTable'); 
-                var newRow = configureTable.insertRow(-1);
-                newRow.style.color='black';
-                var fNameCell = newRow.insertCell(0);
-                fNameCell.style.width='15%';
-                var fName = document.getElementById('newUserfName').value;
-                fNameCell.innerHTML=fName;
-                var lNameCell = newRow.insertCell(1);
-                lNameCell.style.width='15%';
-                var lName = document.getElementById('newUserlName').value;
-                lNameCell.innerHTML=lName;
-                var roleCell = newRow.insertCell(2);
-                roleCell.style.width='7%';
-                var role = document.getElementById('roleSelection').innerHTML;
-                roleCell.innerHTML=role;
-                var clientCell = newRow.insertCell(3);
-                clientCell.style.width='10%';
-                var client = document.getElementById('clientSelection').innerHTML;
-                clientCell.innerHTML=client;
+                var users={
+                            "id": 1,
+                            "firstName": "Nick",
+                            "lastName": "Pisor",
+                            "role": 0,
+                            "client": 0,
+                            "deviceId":"asdfae"
+                        }
+                
+                $.ajax("/users/new",{
+                    type:"post",
+                    dataType: 'json',
+                    data:JSON.stringify(users),
+                    async: true,
+                    success: function (response) {
+                        alert(response);
+                    }
+                    });
+                    var configureTable = document.getElementById('configureTable'); 
+                    var newRow = configureTable.insertRow(-1);
+                    newRow.style.color='black';
+                    var fNameCell = newRow.insertCell(0);
+                    fNameCell.style.width='15%';
+                    var fName = document.getElementById('newUserfName').value;
+                    fNameCell.innerHTML=fName;
+                    var lNameCell = newRow.insertCell(1);
+                    lNameCell.style.width='15%';
+                    var lName = document.getElementById('newUserlName').value;
+                    lNameCell.innerHTML=lName;
+                    var roleCell = newRow.insertCell(2);
+                    roleCell.style.width='7%';
+                    var role = document.getElementById('roleSelection').innerHTML;
+                    roleCell.innerHTML=role;
+                    var clientCell = newRow.insertCell(3);
+                    clientCell.style.width='10%';
+                    var client = document.getElementById('clientSelection').innerHTML;
+                    clientCell.innerHTML=client;
             });
     </script>
 

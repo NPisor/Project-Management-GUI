@@ -741,11 +741,11 @@
     
     <script>
         $('#searchbarButton').click(function () {
-            var customerId = document.getElementById("searchbarText");
-            $.ajax("/userSearch",{
+            var customerId = document.getElementById("searchbarText").value;
+            $.ajax({url:"https://hybrid-matrix-380703.uw.r.appspot.com/users/id",
                         type:"get",
                         dataType: 'json',
-                        data:{"id":customerId.value},
+                        data: {id:customerId},
                         async: true,
                         success: function (response) {
                             sessionStorage.removeItem('customerId');                   
@@ -753,12 +753,11 @@
                             window.location.replace('customer')
                         },
                         error: function (error) {
-                            alert("Invalid User ID. Please try again.");
-                            customerId.value = '';
+                            alert(error.responseText);
+                            customerId = '';
                         }
                     }
-                )
-        
+                )        
         })
 
     </script>
