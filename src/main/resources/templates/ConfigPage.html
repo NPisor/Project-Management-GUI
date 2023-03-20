@@ -19,7 +19,7 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
-<body>
+<body onload="loadRoles();loadClients()">
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -494,47 +494,7 @@
                                         aria-labelledby="rolesDropdown">
                                         <h6 class="dropdown-header">
                                             Roles
-                                        </h6>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3">
-                                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                                    alt="...">
-                                                <div class="status-indicator bg-success"></div>
-                                            </div>
-                                            <div class="userRole">
-                                                Admin
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3">
-                                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                                    alt="...">
-                                                <div class="status-indicator bg-success"></div>
-                                            </div>
-                                            <div class="userRole">
-                                                Supervisor
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3">
-                                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                                    alt="...">
-                                                <div class="status-indicator bg-success"></div>
-                                            </div>
-                                            <div class="userRole">
-                                                Operator
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3">
-                                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                                    alt="...">
-                                                <div class="status-indicator bg-success"></div>
-                                            </div>
-                                            <div class="userRole">
-                                                Laborer
-                                            </div>
-                                        </a>
+                                        </h6>                                        
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -546,37 +506,7 @@
                                         aria-labelledby="clientDropdown">
                                         <h6 class="dropdown-header">
                                             Clients
-                                        </h6>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3">
-                                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                                    alt="...">
-                                                <div class="status-indicator bg-success"></div>
-                                            </div>
-                                            <div class="userClient">
-                                                Client 1
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3">
-                                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                                    alt="...">
-                                                <div class="status-indicator bg-success"></div>
-                                            </div>
-                                            <div class="userClient">
-                                                Client 2
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3">
-                                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                                    alt="...">
-                                                <div class="status-indicator bg-success"></div>
-                                            </div>
-                                            <div class="userClient">
-                                                Client 3
-                                            </div>
-                                        </a>
+                                        </h6>                                        
                                 </div>
                             </li>
                         </ul>
@@ -608,6 +538,87 @@
             $("#roleSelection").html("Select Role:");
             $("#clientSelection").html("Select Client:");
         });
+    </script>
+
+    <script>
+        function loadRoles() {
+            var rolesMenu = document.getElementById('rolesMenu');
+            var roleSelection = document.getElementById('roleSelection');
+            $.ajax("https://hybrid-matrix-380703.uw.r.appspot.com/role/clientId",{
+                        type:"get",
+                        dataType: 'json',
+                        data:{"id":sessionStorage.getItem('customerClient')},
+                        async: true,
+                        success: function (response) {
+                            $.each(response, function(index) {
+                                var newRoleElement = document.createElement("a");
+                                    newRoleElement.className="dropdown-item d-flex align-items-center";
+                                    newRoleElement.href="#";
+                                    newRoleElement.id="userRole";
+                                    var dropdownListElement = document.createElement("div");
+                                    dropdownListElement.className="dropdown-list-image mr-3";
+                                    var roleImgElement = document.createElement("img");
+                                    roleImgElement.className="rounded-circle";
+                                    roleImgElement.src="img/undraw_profile_1.svg";
+                                    roleImgElement.alt=response[index].label;
+                                    var statusIndicatorElement = document.createElement("div");
+                                    statusIndicatorElement.className="status-indicator bg-success";
+                                    var userRoleName = document.createElement("div");
+                                    userRoleName.className="userRole";
+                                    userRoleName.id="roleChoice";
+                                    userRoleName.addEventListener('click', function(){roleSelection.innerHTML=response[index].label});
+                                    userRoleName.innerHTML=response[index].label;
+                                    newRoleElement.appendChild(dropdownListElement);
+                                    dropdownListElement.appendChild(roleImgElement);
+                                    dropdownListElement.appendChild(statusIndicatorElement);
+                                    newRoleElement.appendChild(userRoleName);
+                                    rolesMenu.appendChild(newRoleElement);
+                                });
+                            }
+                        });
+                            
+
+        }
+    </script>
+
+    <script>
+        function loadClients() {
+            var clientsMenu = document.getElementById('clientMenu');
+            var clientSelection = document.getElementById('clientSelection');
+            $.ajax("https://hybrid-matrix-380703.uw.r.appspot.com/clients",{
+                        type:"get",
+                        dataType: 'json',
+                        async: true,
+                        success: function (response) {
+                            $.each(response, function(index) {
+                                var newClientElement = document.createElement("a");
+                                    newClientElement.className="dropdown-item d-flex align-items-center";
+                                    newClientElement.href="#";
+                                    newClientElement.id="userClient";
+                                    var dropdownListElement = document.createElement("div");
+                                    dropdownListElement.className="dropdown-list-image mr-3";
+                                    var clientImgElement = document.createElement("img");
+                                    clientImgElement.className="rounded-circle";
+                                    clientImgElement.src="img/undraw_profile_1.svg";
+                                    clientImgElement.alt=response[index].clientName;
+                                    var statusIndicatorElement = document.createElement("div");
+                                    statusIndicatorElement.className="status-indicator bg-success";
+                                    var clientEntry = document.createElement("div");
+                                    clientEntry.className="userClient";
+                                    clientEntry.id="clientChoice";
+                                    clientEntry.addEventListener('click', function(){clientSelection.innerHTML=response[index].clientName});
+                                    clientEntry.innerHTML=response[index].clientName;
+                                    newClientElement.appendChild(dropdownListElement);
+                                    dropdownListElement.appendChild(clientImgElement);
+                                    dropdownListElement.appendChild(statusIndicatorElement);
+                                    newClientElement.appendChild(clientEntry);
+                                    clientMenu.appendChild(newClientElement);
+                                });
+                            }
+                        });
+                            
+
+        }
     </script>
 
     <script>
@@ -670,42 +681,41 @@
 
     <script>
             $('#clientAddBtn').click(function(){
-                var users={
-                            "id": 1,
-                            "firstName": "Nick",
-                            "lastName": "Pisor",
-                            "role": 0,
-                            "client": 0,
-                            "deviceId":"asdfae"
-                        }
+                var fName = document.getElementById('newUserfName').value;
+                var lName = document.getElementById('newUserlName').value;
+                var role = document.getElementById('roleSelection').innerHTML;
+                var client = document.getElementById('clientSelection').innerHTML;
+                var newUser={
+                                "firstName": fName,
+                                "lastName": lName,
+                                "role": role,
+                                "client": client                         
+                            }
                 
-                $.ajax("/users/new",{
+                $.ajax("https://hybrid-matrix-380703.uw.r.appspot.com/users/new",{
                     type:"post",
                     dataType: 'json',
-                    data:JSON.stringify(users),
+                    data:JSON.stringify(newUser),
+                    contentType:'application/json',
                     async: true,
                     success: function (response) {
-                        alert(response);
+                        alert(response.textStatus);
                     }
-                    });
+                    });                    
                     var configureTable = document.getElementById('configureTable'); 
                     var newRow = configureTable.insertRow(-1);
                     newRow.style.color='black';
                     var fNameCell = newRow.insertCell(0);
                     fNameCell.style.width='15%';
-                    var fName = document.getElementById('newUserfName').value;
                     fNameCell.innerHTML=fName;
                     var lNameCell = newRow.insertCell(1);
                     lNameCell.style.width='15%';
-                    var lName = document.getElementById('newUserlName').value;
                     lNameCell.innerHTML=lName;
                     var roleCell = newRow.insertCell(2);
                     roleCell.style.width='7%';
-                    var role = document.getElementById('roleSelection').innerHTML;
                     roleCell.innerHTML=role;
                     var clientCell = newRow.insertCell(3);
                     clientCell.style.width='10%';
-                    var client = document.getElementById('clientSelection').innerHTML;
                     clientCell.innerHTML=client;
             });
     </script>
@@ -723,11 +733,9 @@
     </script>
 
     <script>
-        $(".userRole").click(function () {
-             var selText = $(this).text();
-             $("#roleSelection").html(selText);
+        $("#roleChoice").click(function () {
          });
-         $(".userClient").click(function () {
+         $("#clientChoice").click(function () {
              var selText = $(this).text();
              $("#clientSelection").html(selText);
          });
@@ -744,6 +752,7 @@
                     async: true,
                     success: function (response) {
                         customerName.innerHTML=response.fname + " " + response.lname;
+                        sessionStorage.setItem('userClient', response.client);
                         }
                     });
         }

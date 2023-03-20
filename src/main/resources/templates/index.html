@@ -750,6 +750,7 @@
                         success: function (response) {
                             sessionStorage.removeItem('customerId');                   
                             sessionStorage.setItem('customerId', response.id);
+                            sessionStorage.setItem('customerClient', response.client);
                             window.location.replace('customer')
                         },
                         error: function (error) {
