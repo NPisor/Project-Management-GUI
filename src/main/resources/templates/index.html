@@ -22,7 +22,7 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" onload="loadTaskData()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -366,7 +366,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Tasks (Open)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">12/25</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="openTasks"></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -384,7 +384,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Tasks (Completed)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">13/25</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="completedTasks"></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -404,7 +404,7 @@
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">98%</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="completionPercent"></div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
@@ -431,7 +431,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Pending Configuration Requests</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="pendingTasks"></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -761,6 +761,25 @@
                 )        
         })
 
+    </script> 
+
+    <script>
+        function loadTaskData(){
+            $.ajax({url:"https://hybrid-matrix-380703.uw.r.appspot.com/task/fillTaskCompletion",
+                        type:"get",
+                        dataType: 'json',
+                        data: {clientId:1},
+                        async: true,
+                        success: function (response) {
+                            var taskTotal = response.total;
+                            $('#openTasks').get(0).innerHTML=response.open + "/" + taskTotal;  
+                            $('#completedTasks').get(0).innerHTML=response.completed + "/" + taskTotal;
+                            $('#pendingTasks').get(0).innerHTML=response.pending + "/" + taskTotal;   
+                            $('#completionPercent').get(0).innerHTML=(Number(response.completed)/Number(taskTotal));
+                        }
+                    }
+                )               
+        }
     </script>
 
 </body>

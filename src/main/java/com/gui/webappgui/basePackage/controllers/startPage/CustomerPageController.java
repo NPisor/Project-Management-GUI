@@ -22,6 +22,7 @@ import com.pmservice.basePackage.repos.TaskRepo;
 import com.pmservice.basePackage.repos.UsersRepo;
 
 @Controller
+@CrossOrigin(origins = "*")
 public class CustomerPageController {
 
     @Autowired
@@ -30,7 +31,7 @@ public class CustomerPageController {
     @Autowired
     private UsersRepo usersRepo;
 
-    @CrossOrigin(origins = "http://localhost:8080")
+    
     @RequestMapping(value = "/tasksearch", method = RequestMethod.GET, produces="application/json")
     @ResponseBody
     public String getTaskSearchResult(String id) throws Exception
@@ -57,7 +58,6 @@ public class CustomerPageController {
         
     }
 
-    @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value = "/loadCustomer", method = RequestMethod.GET, produces="application/json")
     @ResponseBody
     public String loadCustomerData(String customerId) throws Exception

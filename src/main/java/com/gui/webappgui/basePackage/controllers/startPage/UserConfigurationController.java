@@ -12,6 +12,7 @@ import com.pmservice.basePackage.repos.UsersRepo;
 
 
 @Controller
+@CrossOrigin(origins = "*")
 public class UserConfigurationController {
 
     @Autowired
@@ -22,7 +23,7 @@ public class UserConfigurationController {
         return "ConfigPage";
     }
 
-    @CrossOrigin(origins = "http://localhost:8080")
+    
     @PostMapping("/createUser")
     @ResponseBody
     public String createNewUser(Users newUser) throws Exception
