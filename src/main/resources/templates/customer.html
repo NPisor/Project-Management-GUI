@@ -744,7 +744,7 @@
             $.ajax("https://hybrid-matrix-380703.uw.r.appspot.com/users/id",{
                     type:"get",
                     dataType: 'json',
-                    data:{id:customerId},
+                    data:{id:customerId, clientId:0},
                     async: true,
                     success: function (response) {
                         customerName.innerHTML=response.fname + " " + response.lname;

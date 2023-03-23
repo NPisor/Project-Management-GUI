@@ -22,7 +22,7 @@
 
 </head>
 
-<body id="page-top" onload="loadTaskData()">
+<body id="page-top" onload="loadTaskData();getUserByClient()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -153,7 +153,7 @@
                     <form 
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text"class="form-control bg-light border-0 small" placeholder="Enter User Id..."
+                            <input type="text"class="form-control bg-light border-0 small" placeholder="Search for User By ID..."
                                 aria-label="Search" aria-describedby="basic-addon2" id="searchbarText">
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-primary" id="searchbarButton">
@@ -313,7 +313,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${users.fName} + ' ' + ${users.lName}"></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="userNameArea"></span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -350,7 +350,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800" id="dashboardUser"></h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -745,7 +745,7 @@
             $.ajax({url:"https://hybrid-matrix-380703.uw.r.appspot.com/users/id",
                         type:"get",
                         dataType: 'json',
-                        data: {id:customerId},
+                        data: {id:customerId, clientId:0},
                         async: true,
                         success: function (response) {
                             sessionStorage.removeItem('customerId');                   
@@ -762,6 +762,23 @@
         })
 
     </script> 
+
+    <script>
+        function getUserByClient(){
+            $.ajax({url:"https://hybrid-matrix-380703.uw.r.appspot.com/users/id",
+                        type:"get",
+                        dataType: 'json',
+                        data: {id:4,clientId:0},
+                        async: true,
+                        success: function (response) {
+                            var taskTotal = response.total;
+                            $('#dashboardUser').get(0).innerHTML=response.fname + " " + response.lname + "'s Dashboard";  
+                            $('#userNameArea').get(0).innerHTML=response.fname + " " + response.lname;
+                        }
+                    }
+                ) 
+        }
+    </script>
 
     <script>
         function loadTaskData(){
