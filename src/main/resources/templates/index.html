@@ -358,18 +358,34 @@
                     <!-- Content Row -->
                     <div class="row">
 
-                        <!-- Tasks Open -->
+                        <!-- Tasks Open -->                        
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            <div class="font-weight-bold text-primary text-uppercase mb-1">
                                                 Tasks (Open)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="openTasks"></div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <li class="nav-item dropdown no-arrow mx-1" style="list-style-type: none;">
+                                                <a class="nav-link dropdown-toggle" href="#" id="openTasksDropdown" role="button"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    <!-- Counter -->
+                                                    <span class="badge badge-danger badge-counter" id="openTasks"></span>
+                                                </a>
+                                                <!-- Dropdown -->
+                                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                                    aria-labelledby="openTasksElements">
+                                                    <div class="dropdown-header" id="openTasksList">
+                                                        Open Tasks
+                                                        <div class="dropdown-divider"></div>
+                                                    </div>                                                    
+                                                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Open Tasks</a>
+                                                </div>
+                                            </li>                    
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -378,16 +394,66 @@
 
                         <!-- Tasks (Completed) -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            <div class="font-weight-bold text-primary text-uppercase mb-1">
                                                 Tasks (Completed)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="completedTasks"></div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <li class="nav-item dropdown no-arrow mx-1" style="list-style-type: none;">
+                                                <a class="nav-link dropdown-toggle" href="#" id="completedTasksDropdown" role="button"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    <!-- Counter -->
+                                                    <span class="badge badge-danger badge-counter" id="completedTasks"></span>
+                                                </a>
+                                                <!-- Dropdown -->
+                                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                                    aria-labelledby="completedTasksElements">
+                                                    <div class="dropdown-header" id="completedTasksList">
+                                                        Completed Tasks
+                                                        <div class="dropdown-divider"></div>
+                                                    </div>                                                    
+                                                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Completed Tasks</a>
+                                                </div>
+                                            </li>                    
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pending Configuration Requests -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold text-primary text-uppercase mb-1">
+                                                Tasks (Pending)</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <li class="nav-item dropdown no-arrow mx-1" style="list-style-type: none;">
+                                                <a class="nav-link dropdown-toggle" href="#" id="pendingTasksDropdown" role="button"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                    <!-- Counter -->
+                                                    <span class="badge badge-danger badge-counter" id="pendingTasks"></span>
+                                                </a>
+                                                <!-- Dropdown -->
+                                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                                    aria-labelledby="pendingTasksElements">
+                                                    <div class="dropdown-header" id="pendingTasksList">
+                                                        Pending Tasks
+                                                        <div class="dropdown-divider"></div>
+                                                    </div>                                                    
+                                                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Pending Tasks</a>
+                                                </div>
+                                            </li>                    
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -423,24 +489,6 @@
                             </div>
                         </div>
 
-                        <!-- Pending Configuration Requests -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Pending Configuration Requests</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="pendingTasks"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- Content Row -->
 
@@ -700,6 +748,8 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- Task Dropdown Modals -->
+
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -745,7 +795,7 @@
             $.ajax({url:"https://hybrid-matrix-380703.uw.r.appspot.com/users/id",
                         type:"get",
                         dataType: 'json',
-                        data: {id:customerId, clientId:0},
+                        data: {id:customerId, clientId:1},
                         async: true,
                         success: function (response) {
                             sessionStorage.removeItem('customerId');                   
@@ -768,7 +818,7 @@
             $.ajax({url:"https://hybrid-matrix-380703.uw.r.appspot.com/users/id",
                         type:"get",
                         dataType: 'json',
-                        data: {id:4,clientId:0},
+                        data: {id:4,clientId:1},
                         async: true,
                         success: function (response) {
                             var taskTotal = response.total;
@@ -782,21 +832,66 @@
 
     <script>
         function loadTaskData(){
+            var openTasksList = document.getElementById('openTasksList');
+            var completedTasksList = document.getElementById('completedTasksList');
+            var pendingTasksList = document.getElementById('pendingTasksList');
             $.ajax({url:"https://hybrid-matrix-380703.uw.r.appspot.com/task/fillTaskCompletion",
                         type:"get",
                         dataType: 'json',
                         data: {clientId:1},
                         async: true,
                         success: function (response) {
-                            var taskTotal = response.total;
-                            $('#openTasks').get(0).innerHTML=response.open + "/" + taskTotal;  
-                            $('#completedTasks').get(0).innerHTML=response.completed + "/" + taskTotal;
-                            $('#pendingTasks').get(0).innerHTML=response.pending + "/" + taskTotal;   
-                            $('#completionPercent').get(0).innerHTML=(Number(response.completed)/Number(taskTotal));
+                            $('#openTasks').get(0).innerHTML=response[response.length-1].tasksOpen;  
+                            $('#completedTasks').get(0).innerHTML=response[response.length-1].tasksCompleted;
+                            $('#pendingTasks').get(0).innerHTML=response[response.length-1].tasksPending;   
+                            $('#completionPercent').get(0).innerHTML=(Number(response.tasksCompleted)/Number(response.tasksTotal));
+                            $.each(response, function(index) {
+                                var newTaskElement = document.createElement("a");
+                                    newTaskElement.className="dropdown-item d-flex align-items-center";
+                                    newTaskElement.href="#";
+                                    newTaskElement.id="taskElement";
+                                    var dropdownListElement = document.createElement("div");
+                                    dropdownListElement.className="mr-3";
+                                    var taskCircleElement = document.createElement("div");
+                                    taskCircleElement.className="icon-circle bg-warning";
+                                    var statusIndicatorElement = document.createElement("i");
+                                    statusIndicatorElement.className="fas fa-exclamation-triangle text-white";
+
+                                    var taskInfo = document.createElement("div");
+                                    taskInfo.style.flexDirection="column";
+                                    var taskAssignedDate = document.createElement("div");
+                                    taskAssignedDate.className="small text-gray-500";
+                                    taskAssignedDate.innerHTML="Assigned: " + response[index].createdTs;
+                                    var taskMessage = document.createElement("div");
+                                    taskMessage.className="font-weight-bold";
+                                    taskMessage.innerHTML=response[index].message;
+
+                                    newTaskElement.appendChild(dropdownListElement);
+                                    dropdownListElement.appendChild(taskCircleElement);
+                                    taskCircleElement.appendChild(statusIndicatorElement);
+                                    newTaskElement.appendChild(taskInfo);
+                                    taskInfo.appendChild(taskAssignedDate);
+                                    taskInfo.appendChild(taskMessage);
+
+                                    switch(response[index].status){
+                                        case(0):
+                                            openTasksList.appendChild(newTaskElement);
+                                            break;
+                                        case(1):
+                                            pendingTasksList.appendChild(newTaskElement);
+                                            break;
+                                        case(2):
+                                            completedTasksList.appendChild(newTaskElement);
+                                            break;
+
+                                    }
+
+                                    newTaskElement.addEventListener('click', function(){alert("click.")});
+                                });
+                            }
+                            
                         }
-                    }
-                )               
-        }
+                    )};   
     </script>
 
 </body>
